@@ -3,7 +3,6 @@ Support to interface with Alexa Devices.
 
 For more details about this platform, please refer to the documentation at
 https://community.home-assistant.io/t/echo-devices-alexa-as-media-player-testers-needed/58639
-VERSION 0.9.5
 """
 import logging
 
@@ -61,6 +60,9 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_URL): cv.string,
     vol.Optional(CONF_DEBUG, default=False): cv.boolean,
 })
+
+version_tuple = (0, 9, 5)
+version = version_string = __version__ = '%d.%d.%d' % version_tuple
 
 
 def request_configuration(hass, config, setup_platform_callback,
@@ -131,6 +133,7 @@ def request_configuration(hass, config, setup_platform_callback,
 def setup_platform(hass, config, add_devices_callback,
                    discovery_info=None):
     """Set up the Alexa platform."""
+    _LOGGER.info('%s version %s', __name__, version)
     if ALEXA_DATA not in hass.data:
         hass.data[ALEXA_DATA] = {}
 
